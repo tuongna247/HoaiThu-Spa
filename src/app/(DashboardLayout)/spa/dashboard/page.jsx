@@ -26,7 +26,11 @@ import {
   EventAvailable as EventIcon,
   TrendingUp as TrendingIcon,
   Spa as SpaIcon,
-  Add as AddIcon
+  Add as AddIcon,
+  LocalOffer as PromotionIcon,
+  CardGiftcard as PackageIcon,
+  History as HistoryIcon,
+  ArrowForward as ArrowForwardIcon
 } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import PageContainer from '@/app/components/container/PageContainer';
@@ -113,7 +117,144 @@ const SpaDashboard = () => {
       <Breadcrumb title="Spa Dashboard" items={BCrumb} />
 
       <Box mt={3}>
+        {/* Quick Access Cards */}
+        <Typography variant="h5" mb={2}>Quick Access</Typography>
+        <Grid container spacing={3} mb={4}>
+          <Grid item xs={12} sm={6} md={4} lg={2}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 4
+                }
+              }}
+              onClick={() => router.push('/spa/customers')}
+            >
+              <CardContent sx={{ textAlign: 'center' }}>
+                <PeopleIcon sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />
+                <Typography variant="h6">Customers</Typography>
+                <Typography variant="h4" color="primary.main" mt={1}>
+                  {stats?.overview?.totalCustomers || 0}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4} lg={2}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 4
+                }
+              }}
+              onClick={() => router.push('/spa/services')}
+            >
+              <CardContent sx={{ textAlign: 'center' }}>
+                <SpaIcon sx={{ fontSize: 40, color: 'success.main', mb: 1 }} />
+                <Typography variant="h6">Services</Typography>
+                <Typography variant="h4" color="success.main" mt={1}>
+                  {stats?.counts?.services || 0}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4} lg={2}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 4
+                }
+              }}
+              onClick={() => router.push('/spa/promotions')}
+            >
+              <CardContent sx={{ textAlign: 'center' }}>
+                <PromotionIcon sx={{ fontSize: 40, color: 'warning.main', mb: 1 }} />
+                <Typography variant="h6">Promotions</Typography>
+                <Typography variant="h4" color="warning.main" mt={1}>
+                  {stats?.counts?.promotions || 0}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4} lg={2}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 4
+                }
+              }}
+              onClick={() => router.push('/spa/service-promotions')}
+            >
+              <CardContent sx={{ textAlign: 'center' }}>
+                <PackageIcon sx={{ fontSize: 40, color: 'info.main', mb: 1 }} />
+                <Typography variant="h6">Packages</Typography>
+                <Typography variant="h4" color="info.main" mt={1}>
+                  {stats?.counts?.servicePromotions || 0}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4} lg={2}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 4
+                }
+              }}
+              onClick={() => router.push('/spa/usage')}
+            >
+              <CardContent sx={{ textAlign: 'center' }}>
+                <HistoryIcon sx={{ fontSize: 40, color: 'secondary.main', mb: 1 }} />
+                <Typography variant="h6">Usage</Typography>
+                <Typography variant="h4" color="secondary.main" mt={1}>
+                  {stats?.usage?.thisMonth || 0}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4} lg={2}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: 4
+                }
+              }}
+              onClick={() => router.push('/spa/customers')}
+            >
+              <CardContent sx={{ textAlign: 'center' }}>
+                <EventIcon sx={{ fontSize: 40, color: 'error.main', mb: 1 }} />
+                <Typography variant="h6">Active</Typography>
+                <Typography variant="h4" color="error.main" mt={1}>
+                  {stats?.overview?.customersWithRemaining || 0}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
         {/* Statistics Cards */}
+        <Typography variant="h5" mb={2}>Overview Statistics</Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} lg={3}>
             <Card>

@@ -119,10 +119,10 @@ export async function POST(request) {
     } = body;
 
     // Validation
-    if (!firstName || !lastName || !phoneNumber || !dateOfBirth) {
+    if (!firstName || !lastName || !phoneNumber) {
       return NextResponse.json({
         status: 400,
-        msg: 'First name, last name, phone number, and date of birth are required'
+        msg: 'First name, last name, and phone number are required'
       }, { status: 400 });
     }
 
@@ -153,7 +153,7 @@ export async function POST(request) {
       lastName,
       email,
       phoneNumber,
-      dateOfBirth: new Date(dateOfBirth),
+      dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined,
       address,
       notes
     });

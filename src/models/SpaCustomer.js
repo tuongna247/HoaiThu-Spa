@@ -41,14 +41,12 @@ const SpaCustomerSchema = new mongoose.Schema({
   },
   dateOfBirth: {
     type: Date,
-    required: true
+    required: false
   },
   address: {
-    street: String,
-    city: String,
-    state: String,
-    zipCode: String,
-    country: String
+    type: String,
+    trim: true,
+    maxlength: 500
   },
   isActive: {
     type: Boolean,

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import SpaPromotion from '@/models/SpaPromotion';
+import SpaService from '@/models/SpaService';
+import SpaServicePromotion from '@/models/SpaServicePromotion';
 import { verifyToken } from '@/lib/auth';
 
 // GET - List all promotions
@@ -45,13 +47,31 @@ export async function GET(request) {
       .limit(limit)
       .lean();
 
+    // Fetch linked services for each promotion
+    const promotionsWithServices = await Promise.all(
+      promotions.map(async (promotion) => {
+        const servicePromotions = await SpaServicePromotion.find({
+          promotionId: promotion._id
+        }).populate('serviceId').lean();
+
+        return {
+          ...promotion,
+          promotionName: promotion.name,
+          times: promotion.reduceTimes,
+          discountPercent: promotion.discountPercentage,
+          services: servicePromotions.map(sp => sp.serviceId).filter(s => s),
+          servicePromotions: servicePromotions
+        };
+      })
+    );
+
     const total = await SpaPromotion.countDocuments(query);
 
     return NextResponse.json({
       status: 200,
       msg: 'Promotions retrieved successfully',
       data: {
-        promotions,
+        promotions: promotionsWithServices,
         pagination: {
           total,
           page,
@@ -87,40 +107,71 @@ export async function POST(request) {
 
     const body = await request.json();
     const {
-      name,
+      promotionName,
       description,
-      reduceTimes,
-      discountPercentage,
-      discountAmount,
-      startDate,
-      endDate
+      times,
+      discountPercent,
+      serviceIds
     } = body;
 
     // Validation
-    if (!name || !description || !reduceTimes) {
+    if (!promotionName || !description || !times) {
       return NextResponse.json({
         status: 400,
-        msg: 'Name, description, and reduce times are required'
+        msg: 'Promotion name, description, and times are required'
+      }, { status: 400 });
+    }
+
+    if (!serviceIds || serviceIds.length === 0) {
+      return NextResponse.json({
+        status: 400,
+        msg: 'At least one service must be selected'
       }, { status: 400 });
     }
 
     // Create promotion
     const promotion = new SpaPromotion({
-      name,
+      name: promotionName,
       description,
-      reduceTimes,
-      discountPercentage: discountPercentage || 0,
-      discountAmount: discountAmount || 0,
-      startDate: startDate ? new Date(startDate) : new Date(),
-      endDate: endDate ? new Date(endDate) : null
+      reduceTimes: times,
+      discountPercentage: discountPercent || 0,
+      discountAmount: 0,
+      startDate: new Date(),
+      endDate: null
     });
 
     await promotion.save();
 
+    // Create service-promotion links
+    const servicePromotions = [];
+    for (const serviceId of serviceIds) {
+      const service = await SpaService.findById(serviceId);
+      if (!service) continue;
+
+      // Calculate final price with discount
+      const discountAmount = (service.basePrice * (discountPercent || 0)) / 100;
+      const finalPrice = service.basePrice - discountAmount;
+
+      const servicePromotion = new SpaServicePromotion({
+        serviceId: service._id,
+        serviceName: service.name,
+        promotionId: promotion._id,
+        promotionName: promotion.name,
+        finalPrice: finalPrice,
+        timesIncluded: times
+      });
+
+      await servicePromotion.save();
+      servicePromotions.push(servicePromotion);
+    }
+
     return NextResponse.json({
       status: 201,
       msg: 'Promotion created successfully',
-      data: { promotion }
+      data: {
+        promotion,
+        servicePromotions
+      }
     }, { status: 201 });
 
   } catch (error) {

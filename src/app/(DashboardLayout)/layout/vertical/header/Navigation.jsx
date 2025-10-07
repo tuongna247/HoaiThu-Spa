@@ -36,7 +36,7 @@ const AppDD = () => {
       href="/spa/dashboard"
       component={Link}
     >
-      Spa Dashboard
+      Dashboard
     </Button>
 
     {/* Customers - For Admin and Mod */}
@@ -62,6 +62,45 @@ const AppDD = () => {
         component={Link}
       >
         Services
+      </Button>
+    )}
+
+    {/* Promotions - For Admin and Mod */}
+    {(user?.role === 'admin' || user?.role === 'mod') && (
+      <Button
+        color="inherit"
+        sx={{ color: (theme) => theme.palette.text.secondary }}
+        variant="text"
+        href="/spa/promotions"
+        component={Link}
+      >
+        Promotions
+      </Button>
+    )}
+
+    {/* Service Packages - For Admin and Mod */}
+    {(user?.role === 'admin' || user?.role === 'mod') && (
+      <Button
+        color="inherit"
+        sx={{ color: (theme) => theme.palette.text.secondary }}
+        variant="text"
+        href="/spa/service-promotions"
+        component={Link}
+      >
+        Packages
+      </Button>
+    )}
+
+    {/* Usage - For Admin and Mod */}
+    {(user?.role === 'admin' || user?.role === 'mod') && (
+      <Button
+        color="inherit"
+        sx={{ color: (theme) => theme.palette.text.secondary }}
+        variant="text"
+        href="/spa/usage"
+        component={Link}
+      >
+        Usage
       </Button>
     )}
   </>);

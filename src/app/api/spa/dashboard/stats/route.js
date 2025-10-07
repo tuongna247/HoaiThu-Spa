@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import SpaCustomer from '@/models/SpaCustomer';
 import SpaService from '@/models/SpaService';
+import SpaPromotion from '@/models/SpaPromotion';
+import SpaServicePromotion from '@/models/SpaServicePromotion';
 import SpaCustomerPurchase from '@/models/SpaCustomerPurchase';
 import SpaServiceUsage from '@/models/SpaServiceUsage';
 import { verifyToken } from '@/lib/auth';
@@ -152,6 +154,11 @@ export async function GET(request) {
       .limit(10)
       .lean();
 
+    // 9. Count all entities
+    const totalServices = await SpaService.countDocuments({ isActive: true });
+    const totalPromotions = await SpaPromotion.countDocuments({ isActive: true });
+    const totalServicePromotions = await SpaServicePromotion.countDocuments({ isActive: true });
+
     return NextResponse.json({
       status: 200,
       msg: 'Dashboard statistics retrieved successfully',
@@ -162,6 +169,11 @@ export async function GET(request) {
           totalActivePackages,
           totalRevenue: Math.round(totalRevenue * 100) / 100,
           thisMonthRevenue: Math.round(thisMonthRevenue * 100) / 100
+        },
+        counts: {
+          services: totalServices,
+          promotions: totalPromotions,
+          servicePromotions: totalServicePromotions
         },
         usage: {
           today: usageToday,
