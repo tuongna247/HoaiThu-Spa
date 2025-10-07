@@ -1,8 +1,5 @@
-Onboarding supplier:
-Supplier đăng ký → nộp KYC (company, tax, bank) → Country Admin/ Master Admin duyệt → tài khoản supplier active → supplier tạo product → product publish (có thể bước approve content).
-Booking flow (MVP):
-User tìm → chọn date → checkout → payment provider (card/PayPal/PayLater) → booking tạo (status: confirmed/held/pending) → supplier nhận notification → supplier xác nhận (nếu cần) → hệ thống ghi ledger, tính hoa hồng platform → tiền giữ ở escrow / xử lý payout theo chu kỳ.
-Refund & cancellation:
-User request cancel → kiểm tra cancellation policy → auto/refund partial → tạo refund record → accountant xử lý payout điều chỉnh.
-Payout:
-Hệ thống batch payouts (weekly/monthly) → deduct platform fees → tạo payout record → accountant trigger transfer (Payoneer/Bank API) → update payout status.
+Please help me clean up the current modal, page 
+create new code by the modal from modal.md you can add some information if need.
+Create pages as sites.md  add information if needed 
+add links to the pages in the sidebar.
+Notes update mongodb too clean up the code and add new db schema if needed.

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: leetour-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: leetour
+      MONGO_INITDB_ROOT_PASSWORD: leetour123
+      MONGO_INITDB_DATABASE: leetour
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - leetour-network
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: leetour-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: leetour
+      ME_CONFIG_MONGODB_ADMINPASSWORD: leetour123
+      ME_CONFIG_MONGODB_URL: mongodb://leetour:leetour123@mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - mongodb
+    networks:
+      - leetour-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  leetour-network:
+    driver: bridge

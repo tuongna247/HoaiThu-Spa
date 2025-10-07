@@ -8,18 +8,12 @@ import {
   IconStar,
   IconMoodSmile,
   IconAperture,
-  IconMapPin,
-  IconSettings,
-  IconPlus,
-  IconList,
   IconUsers,
-  IconScissors,
-  IconClipboardList,
   IconGift,
   IconSpa,
-  IconPackages,
-  IconTrendingDown,
-  IconCategory,
+  IconLayoutDashboard,
+  IconPackage,
+  IconClipboardCheck,
 } from '@tabler/icons-react';
 
 const Menuitems = [
@@ -42,46 +36,48 @@ const Menuitems = [
     icon: IconAperture,
     href: '/sample-page',
   },
-  {
-    id: uniqueId(),
-    title: 'Public Tours',
-    icon: IconMapPin,
-    href: '/tours',
-    external: true,
-    chip: 'Public',
-    chipColor: 'success',
-  },
-
 
   {
     navlabel: true,
-    subheader: 'Administration',
+    subheader: 'Spa Management',
   },
   {
     id: uniqueId(),
-    title: 'Tour Management',
-    icon: IconSettings,
-    href: '/admin/tours',
-    children: [
-      {
-        id: uniqueId(),
-        title: 'All Tours',
-        icon: IconList,
-        href: '/admin/tours',
-      },
-      {
-        id: uniqueId(),
-        title: 'Add New Tour',
-        icon: IconPlus,
-        href: '/admin/tours/new',
-      },
-    ],
+    title: 'Spa Dashboard',
+    icon: IconLayoutDashboard,
+    href: '/spa/dashboard',
+    chip: 'New',
+    chipColor: 'success',
   },
   {
     id: uniqueId(),
-    title: 'Bookings',
-    icon: IconClipboardList,
-    href: '/admin/bookings',
+    title: 'Customers',
+    icon: IconUsers,
+    href: '/spa/customers',
+  },
+  {
+    id: uniqueId(),
+    title: 'Services',
+    icon: IconSpa,
+    href: '/spa/services',
+  },
+  {
+    id: uniqueId(),
+    title: 'Promotions',
+    icon: IconGift,
+    href: '/spa/promotions',
+  },
+  {
+    id: uniqueId(),
+    title: 'Service Packages',
+    icon: IconPackage,
+    href: '/spa/service-promotions',
+  },
+  {
+    id: uniqueId(),
+    title: 'Record Usage',
+    icon: IconClipboardCheck,
+    href: '/spa/usage',
   },
 
   {

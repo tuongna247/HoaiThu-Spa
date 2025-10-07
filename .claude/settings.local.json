@@ -9,7 +9,9 @@
       "Bash(del test-connection.js test-google-oauth.js test-auth-flow.js)",
       "Bash(pkill:*)",
       "Bash(rm:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(docker:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
