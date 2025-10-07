@@ -1,0 +1,14 @@
+Users (id, role, name, email, phone, password_hash, locale, country_id, created_at)
+Suppliers (id, user_id_owner, company_info, KYC_status, bank_info, payout_method)
+SupplierUsers (supplier_id, user_id, role)
+Countries / Cities / Destinations
+Categories / Tags
+Products (tour) (id, supplier_id, title, slug, desc, duration, inclusions, exclusions, meeting_point, languages, status)
+ProductImages
+Schedules / Availability (product_id, date, start_time, capacity, price_override)
+Bookings (id, product_id, user_id, booking_date, travel_date, pax_breakdown, total_amount, status)
+Payments (booking_id, provider_txn_id, status, amount, fee)
+Payouts (supplier_id, period, amount, status)
+Reviews (product_id, user_id, rating, text)
+Refunds / Disputes / Tickets
+AuditLogs

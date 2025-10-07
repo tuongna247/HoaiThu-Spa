@@ -1,0 +1,36 @@
+Home
+	Hero search (destination / activity / date / pax)
+	Featured / Trending / Popular by city
+	Categories
+	Loyalty / Rewards info
+Destinations → City → Activity list → Activity detail (book)
+Supplier / Partner (signup / login)
+Agent / Travel Agent Program
+About / Help / FAQs / Policies
+Account (user)
+	My bookings
+	Profile & Payments
+	Reviews & Rewards
+Admin Portal (Master Admin)
+	Dashboard (KPIs)
+	Country Admins management
+	Supplier approvals & audit
+	Finance / payouts oversight
+	Global settings (fees, currencies, locales)
+Supplier Portal (Supplier)
+	Dashboard (bookings, revenue, calendar)
+	Product management (create/edit tours)
+	Pricing & availability calendar
+	Content: photos, itineraries, inclusions, T&Cs
+	Booking management (confirm, cancel, modify)
+	Payout / invoice management
+	Reports & analytics
+Supervisor Portal (quản lý user supplier)
+	Team / sub-accounts for multiple supplier users
+	Approve / revoke supplier users
+	Activity / quality monitoring
+Accountant Portal
+	Invoices, refunds, tax reports
+	Payout ledger, reconciliation
+	Export (CSV / XLS / integration)
+Help & Support (chat / tickets / phone)

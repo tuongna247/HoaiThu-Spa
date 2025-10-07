@@ -1,0 +1,8 @@
+Onboarding supplier:
+Supplier đăng ký → nộp KYC (company, tax, bank) → Country Admin/ Master Admin duyệt → tài khoản supplier active → supplier tạo product → product publish (có thể bước approve content).
+Booking flow (MVP):
+User tìm → chọn date → checkout → payment provider (card/PayPal/PayLater) → booking tạo (status: confirmed/held/pending) → supplier nhận notification → supplier xác nhận (nếu cần) → hệ thống ghi ledger, tính hoa hồng platform → tiền giữ ở escrow / xử lý payout theo chu kỳ.
+Refund & cancellation:
+User request cancel → kiểm tra cancellation policy → auto/refund partial → tạo refund record → accountant xử lý payout điều chỉnh.
+Payout:
+Hệ thống batch payouts (weekly/monthly) → deduct platform fees → tạo payout record → accountant trigger transfer (Payoneer/Bank API) → update payout status.
